@@ -60,23 +60,31 @@ var CliowebGenerator = yeoman.generators.Base.extend({
 
   app: function () {
     this.mkdir('_layouts');
+    this.mkdir('_includes');
     this.mkdir('css');
     this.mkdir('js');
 
     if (this.compass) {
-      this.mkdir("_scss");
-      this.mkdir("_scss/common");
-      this.mkdir("_scss/modules");
-      
+      this.mkdir("scss");
+      this.mkdir("scss/common");
+      this.mkdir("scss/modules");
+
       this.copy("_config.yml", "_config.yml");
       this.copy("_Gemfile", "Gemfile");
+      this.copy("scss/style.scss", "scss/style.scss");
     }
 
     this.copy('_Gruntfile.js', 'Gruntfile.js');
     this.copy('_LICENSE', 'LICENSE');
     this.copy('_README.md', 'README.md');
     this.copy('index.html', 'index.html');
+    this.copy('css/main.css', 'css/main.css');
+    this.copy('js/plugin.js', 'js/plugin.js');
+
     this.copy('_layouts/default.html', '_layouts/default.html');
+    this.copy('_includes/footer.html', '_includes/footer.html');
+    this.copy('_includes/head.html', '_includes/head.html');
+    this.copy('_includes/header.html', '_includes/header.html');
 
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
