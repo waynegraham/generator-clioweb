@@ -1,4 +1,4 @@
-'use strict';
+'se strict';
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
@@ -23,23 +23,60 @@ var CliowebGenerator = yeoman.generators.Base.extend({
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the marvelous Clioweb generator!'));
 
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    var prompts = [
+      {
+        name: 'projectName',
+        message: 'What would you like to name this project?',
+        default: 'Foobar'
+      },
+      {
+        name: 'description',
+        message: 'Describe the project',
+        default: "Just another Scholars' Lab Joint"
+      },
+      {
+        type: 'confirm',
+        name: 'compass',
+        message: "Would you like to enable Compass & Susy?",
+        default: true
+      },
+      {
+        type: 'confirm',
+        name: 'bower',
+        message: 'Would you like to use bower?',
+        default: true
+      }
+    ];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
+      this.projectName = props.projectName;
+      this.description = props.description;
+      this.bower       = props.bower;
+      this.compass     = props.compass;
 
       done();
     }.bind(this));
   },
 
   app: function () {
-    this.mkdir('app');
-    this.mkdir('app/templates');
+    this.mkdir('_layouts');
+    this.mkdir('css');
+    this.mkdir('js');
+
+    if (this.compass) {
+      this.mkdir("_scss");
+      this.mkdir("_scss/common");
+      this.mkdir("_scss/modules");
+      
+      this.copy("_config.yml", "_config.yml");
+      this.copy("_Gemfile", "Gemfile");
+    }
+
+    this.copy('_Gruntfile.js', 'Gruntfile.js');
+    this.copy('_LICENSE', 'LICENSE');
+    this.copy('_README.md', 'README.md');
+    this.copy('index.html', 'index.html');
+    this.copy('_layouts/default.html', '_layouts/default.html');
 
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
