@@ -1,9 +1,11 @@
 title: <%= projectName %>
 description: <%= description %>
+baseurl: ""
+url: "http://yourdomain.com"
 
 # Build settings
 markdown: kramdown
-exclude: ["README.md", "Gruntfile.js", "changelog.md", "Gemfile", "Gemfile.lock", "node_modules", "bower_components", "scss", "config.rb", "package.json", "LICENSE-MIT", "bower.json"]
+exclude: ["README.md", "Gruntfile.js", "changelog.md", "Gemfile", "Gemfile.lock", "node_modules", "bower_components", "scss", "config.rb", "package.json", "LICENSE", "bower.json"]
 
 gems:
   - jekyll-sitemap
